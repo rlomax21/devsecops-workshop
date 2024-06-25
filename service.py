@@ -9,7 +9,7 @@ db_connection = db.connect_database()
 
 # API to get the list of products
 @app.route("/api/product/list", methods=["GET"])
-def apiProduct_list():
+def api_product_list():
     limit = int(request.args.get('limit', 10))
     offset = int(request.args.get('offset', 0))
     products = db.get_products(db_connection, limit, offset)
@@ -31,8 +31,7 @@ def api_product_add():
     # The else is not necessary here, remove it by applying the suggested fix.
     if success:
         return jsonify({"status": "ok"}), 200
-    else:
-        return jsonify({"status": "product already exists"}), 500
+    return jsonify({"status": "product already exists"}), 500
 
 # API to list all products with an endpoint
 @app.route("/product/list", methods=["GET"])
@@ -58,5 +57,4 @@ def index():
 # See https://docs.datadoghq.com/code_analysis/static_analysis_rules/python-flask/listen-all-interfaces/
 # Bind to localhost for development purposes and attach to the address 127.0.0.1
 # Replace with the following:
-# app.run(host="127.0.0.1")
-app.run(host="0.0.0.0")
+app.run(host="127.0.0.1")
