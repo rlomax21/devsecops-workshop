@@ -19,13 +19,13 @@ def apiProduct_list():
 
 # API to add a product
 @app.route("/api/product/add", methods=["POST"])
-def apiProduct_add():
+def api_product_add():
     product_json = request.json
     product = Product(0, product_json["name"])
 
     # Logging should not have the format string. Replace with the following:
     # logging.info("adding product %s", product.name)
-    logging.info("adding product {0}".format(product.name)) 
+    logging.info("adding product %s", product.name) 
     success = db.add_product(db_connection, product)
 
     # The else is not necessary here, remove it by applying the suggested fix.
@@ -52,8 +52,7 @@ def index():
     # render_template_string may contain an injection. Prefer to use templates in files instead.
     # See https://docs.datadoghq.com/code_analysis/static_analysis_rules/python-flask/no-render-template-string/
     # Replace with the following:
-    # return render_template("index.html")
-    return render_template_string("<html><body><a href=\"/product/list\">product list</a></body></html>")
+    return render_template("index.html")
 
 # Your application should never run on all interfaces.
 # See https://docs.datadoghq.com/code_analysis/static_analysis_rules/python-flask/listen-all-interfaces/
